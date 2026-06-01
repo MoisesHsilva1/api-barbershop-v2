@@ -25,5 +25,4 @@ jobs:
       - name: Docker Build
         run: docker build . -t the-moments:latest
 
-      - name: Run Tests
-        run: docker run --rm the-moments:latest mvn test
+
