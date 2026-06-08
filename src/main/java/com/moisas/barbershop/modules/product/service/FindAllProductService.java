@@ -11,10 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class FindAllProductService {
-    private final ProductRepository productsRepository;
+    private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
     public Page<ProductDTO> execute(FindAllProductDTO params) {
@@ -25,7 +26,7 @@ public class FindAllProductService {
 
     private Page<ProductEntity> fetchProduct(FindAllProductDTO params, Pageable pageable) {
         return (params.getPrice() != null)
-                ? productsRepository.findAllByPrice(params.getPrice(), pageable)
-                : productsRepository.findAll(pageable);
+                ? productRepository.findAllByPrice(params.getPrice(), pageable)
+                : productRepository.findAll(pageable);
     }
 }
