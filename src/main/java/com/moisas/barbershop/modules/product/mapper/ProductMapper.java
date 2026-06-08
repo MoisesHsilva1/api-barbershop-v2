@@ -29,6 +29,7 @@ public class ProductMapper {
                 .description(model.getDescription())
                 .price(model.getPrice())
                 .updatedAt(model.getUpdatedAt())
+                .deletedAt(model.getDeletedAt())
                 .createdAt(model.getCreatedAt())
                 .build();
     }
