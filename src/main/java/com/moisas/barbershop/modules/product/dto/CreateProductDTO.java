@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 @Builder
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateProductDTO {
     private String name;
-    private  String description;
+    private String description;
     private BigDecimal price;
-    private LocalDateTime updateAt;
+    private Instant updatedAt;
 }

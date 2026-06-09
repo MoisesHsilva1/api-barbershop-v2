@@ -12,12 +12,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class FindOneProductService {
-    private final ProductMapper servicesMapper;
-    private final ProductRepository productsRepository;
+    private final ProductMapper productMapper;
+    private final ProductRepository productRepository;
 
     @Transactional(readOnly = true)
     public Optional<ProductDTO> execute(String id) {
-        return productsRepository.findById(id).map(servicesMapper::toDTO);
+        return productRepository.findById(id).map(productMapper::toDTO);
     }
-
 }

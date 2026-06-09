@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class CreateProductService {
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
     private final ProductMapper mapper;
 
     @Transactional
     public ProductDTO execute(CreateProductDTO service) {
         ProductEntity model = mapper.toEntity(service);
 
-        return mapper.toDTO(repository.save(model));
+        return mapper.toDTO(productRepository.save(model));
     }
 }
