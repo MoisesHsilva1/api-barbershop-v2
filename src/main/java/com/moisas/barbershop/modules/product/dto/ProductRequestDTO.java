@@ -13,7 +13,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProductDTO {
+public class ProductRequestDTO {
     private String name;
     private String description;
     private BigDecimal price;

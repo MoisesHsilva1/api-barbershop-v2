@@ -1,6 +1,6 @@
 package com.moisas.barbershop.unit.product.service;
 
-import com.moisas.barbershop.modules.product.dto.CreateProductDTO;
+import com.moisas.barbershop.modules.product.dto.ProductRequestDTO;
 import com.moisas.barbershop.modules.product.dto.ProductDTO;
 import com.moisas.barbershop.modules.product.entity.ProductEntity;
 import com.moisas.barbershop.modules.product.mapper.ProductMapper;
@@ -30,7 +30,7 @@ class CreateProductServiceTest {
 
     @Test
     void shouldCreateProductSuccessfully() {
-        CreateProductDTO createDto = new CreateProductDTO();
+        ProductRequestDTO createDto = new ProductRequestDTO();
         ProductEntity entity = new ProductEntity();
         ProductEntity savedEntity = new ProductEntity();
         ProductDTO expectedDto = new ProductDTO();

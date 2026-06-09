@@ -1,6 +1,6 @@
 package com.moisas.barbershop.modules.product.service;
 
-import com.moisas.barbershop.modules.product.dto.CreateProductDTO;
+import com.moisas.barbershop.modules.product.dto.ProductRequestDTO;
 import com.moisas.barbershop.modules.product.dto.ProductDTO;
 import com.moisas.barbershop.modules.product.entity.ProductEntity;
 import com.moisas.barbershop.modules.product.mapper.ProductMapper;
@@ -16,8 +16,8 @@ public class CreateProductService {
     private final ProductMapper mapper;
 
     @Transactional
-    public ProductDTO execute(CreateProductDTO service) {
-        ProductEntity model = mapper.toEntity(service);
+    public ProductDTO execute(ProductRequestDTO product) {
+        ProductEntity model = mapper.toEntity(product);
 
         return mapper.toDTO(productRepository.save(model));
     }
