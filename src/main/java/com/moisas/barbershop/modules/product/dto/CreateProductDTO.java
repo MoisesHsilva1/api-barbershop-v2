@@ -17,5 +17,5 @@ public class CreateProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private Instant updateAt;
+    private Instant updatedAt;
 }

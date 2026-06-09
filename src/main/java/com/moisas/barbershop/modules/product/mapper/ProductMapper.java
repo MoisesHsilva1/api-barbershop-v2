@@ -17,7 +17,7 @@ public class ProductMapper {
         model.setName(dto.getName());
         model.setDescription(dto.getDescription());
         model.setPrice(dto.getPrice());
-        model.setUpdatedAt(dto.getUpdateAt());
+        model.setUpdatedAt(dto.getUpdatedAt());
 
         return model;
     }
