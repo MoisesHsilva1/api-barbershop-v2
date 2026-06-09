@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +33,7 @@ class DeleteProductServiceTest {
         ProductEntity product = new ProductEntity();
         product.setId(productId);
 
-        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.findByIdOrThrow(productId)).thenReturn(product);
 
         deleteProductService.execute(productId);
 
@@ -49,8 +48,10 @@ class DeleteProductServiceTest {
     void shouldThrowExceptionWhenProductNotFound() {
         String productId = UUID.randomUUID().toString();
 
-        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+        when(productRepository.findByIdOrThrow(productId)).thenThrow(new ProductNotFoundException());
 
         assertThrows(ProductNotFoundException.class, () -> deleteProductService.execute(productId));
+
+        verify(productRepository).findByIdOrThrow(productId);
     }
 }
