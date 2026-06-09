@@ -1,7 +1,7 @@
 package com.moisas.barbershop.modules.product.mapper;
 
 
-import com.moisas.barbershop.modules.product.dto.CreateProductDTO;
+import com.moisas.barbershop.modules.product.dto.ProductRequestDTO;
 import com.moisas.barbershop.modules.product.dto.ProductDTO;
 import com.moisas.barbershop.modules.product.entity.ProductEntity;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductMapper {
 
-    public ProductEntity toEntity(CreateProductDTO dto) {
+    public ProductEntity toEntity(ProductRequestDTO dto) {
         ProductEntity model = new ProductEntity();
 
         model.setName(dto.getName());
