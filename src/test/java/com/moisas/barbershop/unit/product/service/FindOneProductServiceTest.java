@@ -5,6 +5,7 @@ import com.moisas.barbershop.modules.product.entity.ProductEntity;
 import com.moisas.barbershop.modules.product.mapper.ProductMapper;
 import com.moisas.barbershop.modules.product.repository.ProductRepository;
 import com.moisas.barbershop.modules.product.service.FindOneProductService;
+import com.moisas.barbershop.modules.shared.exceptions.ProductNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,13 +13,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 @ExtendWith(MockitoExtension.class)
-class FindProductServiceTest {
+class FindOneProductServiceTest {
 
     @Mock
     private ProductMapper productMapper;
@@ -31,27 +35,29 @@ class FindProductServiceTest {
 
     @Test
     void shouldFindProductSuccessfully() {
-        String serviceId = "service-123";
+        String productId = UUID.randomUUID().toString();
         ProductEntity entity = new ProductEntity();
         ProductDTO expectedDto = new ProductDTO();
 
-        given(productRepository.findById(serviceId)).willReturn(Optional.of(entity));
+        given(productRepository.findById(productId)).willReturn(Optional.of(entity));
         given(productMapper.toDTO(entity)).willReturn(expectedDto);
 
-        Optional<ProductDTO> result = findOneProductService.execute(serviceId);
+        ProductDTO result = findOneProductService.execute(productId);
 
-        assertThat(result).isPresent().contains(expectedDto);
+        assertThat(result).isNotNull().isEqualTo(expectedDto);
+        verify(productRepository).findById(productId);
+        verify(productMapper).toDTO(entity);
     }
 
     @Test
-    void shouldReturnEmptyWhenProductNotFound() {
-        String serviceId = "service-123";
+    void shouldThrowExceptionWhenProductNotFound() {
+        String productId = UUID.randomUUID().toString();
 
-        given(productRepository.findById(serviceId)).willReturn(Optional.empty());
+        given(productRepository.findById(productId)).willReturn(Optional.empty());
 
-        Optional<ProductDTO> result = findOneProductService.execute(serviceId);
+        assertThrows(ProductNotFoundException.class, () -> findOneProductService.execute(productId));
 
-        assertThat(result).isEmpty();
+        verify(productRepository).findById(productId);
         verifyNoInteractions(productMapper);
     }
 }
